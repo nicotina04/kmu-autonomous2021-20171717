@@ -2,4 +2,5 @@
 .png
 .JPG
 .PNG
+venv/
 !doll.jpg

@@ -26,8 +26,8 @@ transform = transforms.Compose([
 ])
 
 
+# https://csm-kr.tistory.com/m/6
 def compare_model(dev):
-    # https://csm-kr.tistory.com/m/6
     valid_set = torchvision.datasets.ImageNet(root='./validset', transform=transform, split='val')
     valid_loader = DataLoader(valid_set, batch_size=128, shuffle=True, num_workers=4)
 

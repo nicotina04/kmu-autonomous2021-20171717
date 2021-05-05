@@ -3,7 +3,7 @@ import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import ElasticNet
+from sklearn.linear_model import RidgeClassifier
 from sklearn.metrics import accuracy_score
 
 
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=324)
 
     # Create pipeline
-    ela_pipeline = make_pipeline(StandardScaler(), ElasticNet(random_state=0))
+    ela_pipeline = make_pipeline(StandardScaler(), RidgeClassifier())
     poseModel = ela_pipeline.fit(x_train, y_train)
 
     # Evaluate my pose model

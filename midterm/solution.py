@@ -7,7 +7,7 @@ import mediapipe as mp
 
 def posing_realtime(my_model):
     f = open(my_model, "rb")
-    model = pickle.load(my_model)
+    model = pickle.load(f)
     f.close()
 
     cap = cv2.VideoCapture(0)
@@ -32,16 +32,18 @@ def posing_realtime(my_model):
             try:
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
 
-                pose_ar = np.array(
-                    [[landmark.x, landmark.y, landmark.z, landmark.visibility] for landmark in pose]
-                ).flatten()
-                pose_ar = [list(pose_ar)]
+                cur_pose = results.pose_landmarks.landmark
+                pose_ar = list(
+                    np.array(
+                        [[landmark.x, landmark.y, landmark.z, landmark.visibility] for landmark in cur_pose]
+                    ).flatten()
+                )
+                pose_ar = [pose_ar]
                 x_captured = pd.DataFrame(pose_ar)
                 pose_predict = model.predict(x_captured)[0]
                 pose_predict_prob = model.predict_proba(x_captured)[0]
                 print("Detected: ", pose_predict, pose_predict_prob)
 
-                cur_pose = results.pose_landmarks.landmark
                 shoulder_x = cur_pose[mp_pose.PoseLandmark.RIGHT_SHOULDER].x
                 shoulder_y = cur_pose[mp_pose.PoseLandmark.RIGHT_SHOULDER].y
                 shoulder = np.array((shoulder_x, shoulder_y))

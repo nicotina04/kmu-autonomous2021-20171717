@@ -9,7 +9,7 @@ mp_pose = mp.solutions.pose
 
 # Initialize the data format
 def init_posing_format(posing):
-    landmarks = ["pose_crd"]
+    landmarks = ["class"]
     for val in range(1, len(posing.pose_landmarks.landmark) + 1):
         landmarks.extend(['x{}'.format(val), 'y{}'.format(val), 'z{}'.format(val), 'v{}'.format(val)])
     print(landmarks)

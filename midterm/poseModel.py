@@ -2,7 +2,7 @@ import pandas as pd
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import StandardScaler
 from sklearn import svm
 from sklearn.metrics import accuracy_score
 
@@ -17,7 +17,7 @@ if __name__ == "__main__":
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=324)
 
     # Create pipeline
-    svm_pipeline = make_pipeline(RobustScaler(), svm.SVC(kernel="sigmoid", C=0.9))
+    svm_pipeline = make_pipeline(StandardScaler(), svm.SVC(probability=True))
     poseModel = svm_pipeline.fit(x_train, y_train)
 
     # Evaluate my pose model

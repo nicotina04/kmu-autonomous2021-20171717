@@ -5,7 +5,7 @@
 ## 프로젝트 주제
 폭력 사건 인지를 위한 인간의 일상, 사격 자세 분류
 
-[발표 동영상](https://studio.youtube.com/video/cRq21xyuajw/edit)
+[발표 동영상](https://youtube.com/video/cRq21xyuajw/edit)
 
 ## Project environment
 python: 3.8.2

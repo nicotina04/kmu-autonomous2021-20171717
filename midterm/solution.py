@@ -29,6 +29,8 @@ def posing_realtime(my_model):
             results = pose.process(image)
             image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
+            mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
+
             try:
                 mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
 
@@ -42,12 +44,12 @@ def posing_realtime(my_model):
                 x_captured = pd.DataFrame(pose_ar)
                 pose_predict = model.predict(x_captured)[0]
                 pose_predict_prob = model.predict_proba(x_captured)[0]
-                print("Detected: ", pose_predict, pose_predict_prob)
+                print("Detected: ", pose_predict)
 
                 shoulder_x = cur_pose[mp_pose.PoseLandmark.RIGHT_SHOULDER].x
                 shoulder_y = cur_pose[mp_pose.PoseLandmark.RIGHT_SHOULDER].y
                 shoulder = np.array((shoulder_x, shoulder_y))
-                cv_window = np.array([1280, 720])
+                cv_window = np.array([960, 540])
                 crd_left = tuple((shoulder * cv_window).astype(int))
 
                 # Draw predicted data

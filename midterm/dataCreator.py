@@ -107,6 +107,7 @@ def get_pose_video(name):
                     continue
                 cv2.waitKey(40)
         cap.release()
+        cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":
@@ -121,5 +122,3 @@ if __name__ == "__main__":
             break
         else:
             print("Wrong number detected. Try again.")
-
-    cv2.destroyAllWindows()
